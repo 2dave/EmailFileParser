@@ -12,7 +12,7 @@ namespace EmailApi
         Start,
         From,
         Header,
-        Body,
+        Body,        
     }
 
     public class EmailFileParser
@@ -45,12 +45,13 @@ namespace EmailApi
             return line;
         }
 
-        //make emailmessage a partial? or partial email into a state?
-        public EmailMessage ParseEmailMessage (string input)
+        public EmailMessage ParseEmailMessage (string input, out string remainder)
         {            
             EmailMessage message = new EmailMessage();
 
-            var line = ParseLine(input, out string remainder);
+            //var line = ParseLine(input, out string remainder); 
+            //now that I have a remainder in ParseEmailMessage don't need to declare another string remainder
+            var line = ParseLine(input, out remainder);
 
             while (line != null)
             {
@@ -89,14 +90,23 @@ namespace EmailApi
                 }
                 else if (this.State == EmailParseStates.Body)
                 {
+                    if (line.StartsWith("From "))
+                    {
+                        //signifies the next email - return the message - don't add more to the body
+                        //perhaps change the state to CompletedEmail?
+
+                        //Q: What is the remainder here? 
+                        //A: it is everything except the current line - which is the "From " line that just came in
+                        //so line plus remainder is all the additional emails
+                        remainder = line + remainder;
+
+                        return message;
+                    }
                     message.Body += line;
                 }
 
                 line = ParseLine(remainder, out remainder);
-
             }
-
-            this.Remainder = remainder;
 
             return message;
         }
