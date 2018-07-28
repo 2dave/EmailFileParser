@@ -32,17 +32,24 @@ namespace EmailTests
                 "From Not Header again\r\n again more header \r\n\r\n again body stuff \r\n\r\n more body \r\n";
 
             EmailFileParser parser = new EmailFileParser();
-            EmailMessage message = parser.ParseEmailMessage(input, out string remainder);
+            //loop through until input = ""
+            EmailMessage message = parser.ParseEmailMessage(input, out input);
+            EmailMessage message2 = parser.ParseEmailMessage(input, out input);
 
             Assert.Equal("Not Header stuff\r\n", message.From);
             Assert.Equal(" more header \r\n", message.Header);
             Assert.Equal(" body stuff \r\n\r\n more body \r\n", message.Body);
             //remainder should be the next message (or everything else)
-            Assert.Equal("From Not Header again\r\n again more header \r\n\r\n again body stuff \r\n\r\n more body \r\n", remainder);
+            //Assert.Equal("From Not Header again\r\n again more header \r\n\r\n again body stuff \r\n\r\n more body \r\n", remainder);
 
         }
 
         //one message split across two inputs
+        //[Fact]
+        //public void TwoMessagesTwoInputs()
+        //{
+
+        //}
 
         //two messages across three inputs
 

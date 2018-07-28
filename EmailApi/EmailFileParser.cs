@@ -50,7 +50,8 @@ namespace EmailApi
             EmailMessage message = new EmailMessage();
 
             //var line = ParseLine(input, out string remainder); 
-            //now that I have a remainder in ParseEmailMessage don't need to declare another string remainder
+            //now that I put remainder back in ParseEmailMessage don't need to 
+            //declare another string remainder
             var line = ParseLine(input, out remainder);
 
             while (line != null)
@@ -93,12 +94,13 @@ namespace EmailApi
                     if (line.StartsWith("From "))
                     {
                         //signifies the next email - return the message - don't add more to the body
-                        //perhaps change the state to CompletedEmail?
 
                         //Q: What is the remainder here? 
                         //A: it is everything except the current line - which is the "From " line that just came in
                         //so line plus remainder is all the additional emails
                         remainder = line + remainder;
+
+                        this.State = EmailParseStates.Start;
 
                         return message;
                     }
