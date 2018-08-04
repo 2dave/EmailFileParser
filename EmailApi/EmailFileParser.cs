@@ -46,7 +46,9 @@ namespace EmailApi
         }
 
         public EmailMessage ParseEmailMessage (string input, out string remainder)
-        {            
+        {
+            //If I create an invalid or corrupt state I need to check this state before anything
+
             EmailMessage message = new EmailMessage();
 
             var line = ParseLine(input, out remainder);
@@ -74,6 +76,7 @@ namespace EmailApi
                     {
                         this.State = EmailParseStates.Body;
                     }
+                    //need to handle what happens if you get another 'From ' in this state
                 }
                 else if (this.State == EmailParseStates.Header)
                 {

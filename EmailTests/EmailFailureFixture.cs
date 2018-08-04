@@ -12,22 +12,19 @@ namespace EmailTests
         [Fact]
         public void OnePartialFromMessage()
         {
-            var input = "From junk stuff no header no body just randmon junk";
+            //At the moment if you don't add a \r\n somewhere in the message then ParseEmailMessage 
+            //will not parse anything because ParseLine will be null
+            var input = "From junk stuff no header no body just random junk\r\n other garbage";
 
             EmailFileParser parser = new EmailFileParser();
-            EmailMessage message;
+            EmailMessage message = parser.ParseEmailMessage(input, out input); 
 
-            do
-            {
-                message = parser.ParseEmailMessage(input, out input);
-
-            } while (input != "From junk stuff no header no body just random junk");
-
-            Assert.Equal("", message.From);
-            Assert.Equal("", message.Header);
-            Assert.Equal("", message.Body);
-            Assert.Equal("From junk stuff no header no body just randmon junk", input);
+            Assert.Equal("junk stuff no header no body just random junk\r\n", message.From);
+            Assert.Null(message.Header);
+            Assert.Null(message.Body);
+            Assert.Equal(" other garbage", input);
         }
+
        
     }
 }

@@ -23,7 +23,30 @@ namespace EmailTests
             Assert.Equal(" body stuff \r\n\r\n more body \r\n", message.Body);
         }
 
-        //two messages in one input 1st
+        [Fact]
+        public void OneMessageThenAPartialMessage()
+        {
+            var input =
+                "From Not Header stuff\r\n more header \r\n\r\n body stuff \r\n\r\n more body \r\n" +
+                "From Not Header again\r\n";
+
+            EmailFileParser parser = new EmailFileParser();
+            EmailMessage message;
+            EmailMessage message2;
+
+            message = parser.ParseEmailMessage(input, out input);
+            message2 = parser.ParseEmailMessage(input, out input);
+
+            Assert.Equal("Not Header stuff\r\n", message.From);
+            Assert.Equal(" more header \r\n", message.Header);
+            Assert.Equal(" body stuff \r\n\r\n more body \r\n", message.Body);
+
+            Assert.Equal("Not Header again\r\n", message2.From);
+            Assert.Null(message2.Header);
+            Assert.Null(message2.Body);
+            Assert.Equal("", input);
+        }
+
         [Fact]
         public void TwoMessagesOneInput()
         {
@@ -94,6 +117,7 @@ namespace EmailTests
 
             Assert.Equal("From junk stuff no header no body just random junk", input);
         }
+
 
         //one message split across two inputs
         //[Fact]
