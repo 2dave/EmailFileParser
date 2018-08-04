@@ -63,7 +63,7 @@ namespace EmailTests
                 "From Not Header stuff\r\n more header \r\n\r\n body stuff \r\n\r\n more body \r\n" +
                 "From Not Header again\r\n again more header \r\n\r\n again body stuff \r\n\r\n more body \r\n" +
                 "From Not Header thrice\r\n third more header \r\n\r\n third body stuff \r\n\r\n more body \r\n" +
-                "From junk stuff no header no body just randmon junk";
+                "From junk stuff no header no body just random junk";
 
             EmailFileParser parser = new EmailFileParser();
             EmailMessage message;
@@ -78,7 +78,7 @@ namespace EmailTests
                 message3 = parser.ParseEmailMessage(input, out input);
 
                 //this loop needs to be rethought some - the loop logic could go into the email parser
-            } while (input != "From junk stuff no header no body just randmon junk");
+            } while (input != "From junk stuff no header no body just random junk");
 
             Assert.Equal("Not Header stuff\r\n", message.From);
             Assert.Equal(" more header \r\n", message.Header);
@@ -92,7 +92,7 @@ namespace EmailTests
             Assert.Equal(" third more header \r\n", message3.Header);
             Assert.Equal(" third body stuff \r\n\r\n more body \r\n", message3.Body);
 
-            Assert.Equal("From junk stuff no header no body just randmon junk", input);
+            Assert.Equal("From junk stuff no header no body just random junk", input);
         }
 
         //one message split across two inputs

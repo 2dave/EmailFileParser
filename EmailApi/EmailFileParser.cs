@@ -49,9 +49,6 @@ namespace EmailApi
         {            
             EmailMessage message = new EmailMessage();
 
-            //var line = ParseLine(input, out string remainder); 
-            //now that I put remainder back in ParseEmailMessage don't need to 
-            //declare another string remainder
             var line = ParseLine(input, out remainder);
 
             while (line != null)
