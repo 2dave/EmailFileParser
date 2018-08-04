@@ -92,9 +92,7 @@ namespace EmailApi
                 else if (this.State == EmailParseStates.Body)
                 {
                     if (line.StartsWith("From "))
-                    {
-                        //signifies the next email - return the message - don't add more to the body
-
+                    {                        
                         //Q: What is the remainder here? 
                         //A: it is everything except the current line - which is the "From " line that just came in
                         //so line plus remainder is all the additional emails
