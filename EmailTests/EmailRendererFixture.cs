@@ -18,7 +18,7 @@ namespace EmailTests
             message.Header = "the header";
             message.Body = "the body";
 
-            var result = renderer.Render(message);
+            var result = renderer.Render(message); 
         }
     }
 }

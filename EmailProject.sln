@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		EmailMessageStates2.png = EmailMessageStates2.png
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailWeb", "EmailWeb\EmailWeb.csproj", "{0B2345CE-2B22-449F-9C22-55655EFD2C19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{96AD2895-3241-43C2-AFFF-382731B6181B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96AD2895-3241-43C2-AFFF-382731B6181B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96AD2895-3241-43C2-AFFF-382731B6181B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B2345CE-2B22-449F-9C22-55655EFD2C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B2345CE-2B22-449F-9C22-55655EFD2C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B2345CE-2B22-449F-9C22-55655EFD2C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B2345CE-2B22-449F-9C22-55655EFD2C19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

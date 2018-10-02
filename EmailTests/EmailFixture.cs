@@ -55,10 +55,10 @@ namespace EmailTests
             Assert.Equal(1356, counter);
         }
         
-        //Since this is only for unit tests, it will live here. 
         public static string FindDir(string filename)
         {
-            var root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            //var root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var root = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
             var inputfile = Path.Combine(root, filename);
 
             return inputfile;

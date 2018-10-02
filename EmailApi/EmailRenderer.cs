@@ -8,7 +8,7 @@ namespace EmailApi
     public class EmailRenderer
     {
         private Razorizer renderer = new Razorizer();
-        private const string Template = "<html><head><title>@Model.From</title></head><body><p>@Model.Body</p></body></html>";
+        private const string Template = "<html><head><title>@Model.From</title></head><body><p>x @Raw(Model.Body)</p></body></html>";
 
         //public string Render(EmailMessage message) => renderer.Parse(Template, message);
 

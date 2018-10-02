@@ -9,4 +9,10 @@
     <ProjectReference Include="..\EmailApi\EmailApi.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="smallsample.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
