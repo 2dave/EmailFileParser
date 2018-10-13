@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using EmailApi;
+using HtmlAgilityPack;
 
 namespace EmailProject
 {
@@ -42,16 +43,30 @@ namespace EmailProject
                 {
                     var message = parser.ParseEmailMessage(input, out input);
 
-                    Console.WriteLine("---FROM -----------------------------------------\n {0}", message.From);
-                    Console.WriteLine("---HEADER -----------------------------------------\n {0}", message.Header);
-                    Console.WriteLine("---BODY -----------------------------------------\n {0}", message.Body);
+                    //Console.WriteLine("---FROM -----------\n {0}", message.From);
+                    //Console.WriteLine("---HEADER ---------\n {0}", message.Header);
+                    //Console.WriteLine("---BODY -----------\n {0}", message.Body);
+                                        
+                    //render the html messages - might no longer be relevant
+                    var result = renderer.Render(message);
+                    File.AppendAllText(path, result); 
 
-                    //render the html messages
-                    var result = renderer.Render(message);                    
+                    //use the html agility pack
+                    var htmldoc = new HtmlDocument();
+                    htmldoc.LoadHtml(message.Body);
+                                        
+                    var htmlnodes = htmldoc.DocumentNode.SelectNodes("//body");
 
-                    File.AppendAllText(path, result);
+                    if (htmlnodes != null)
+                    {
+                        foreach (var node in htmlnodes)
+                        {
+                            Console.WriteLine(node.InnerText);
+                            //Console.WriteLine(node.XPath);
+                            //Console.WriteLine(node.InnerHtml);
+                        }
+                    }                
                 }
-
             }
         }
 
